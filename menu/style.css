@@ -11,11 +11,14 @@
   --_level-one-font-color: #333333;
   --_level-two-font-color: #000000;
   --_width: 1170px;
+  --_horizontal-padding: 32px;
+  --_vertical-padding: 16px;
 
   display: flex;
   flex-wrap: wrap;
   position: relative;
   max-width: var(--_width);
+  min-height: 50px;
   background-color: var(--_main);
   margin: 0 auto;
 
@@ -24,7 +27,7 @@
   }
 
   > li {
-    padding: 16px 32px;
+    padding: var(--_vertical-padding) var(--_horizontal-padding);
 
     > a {
       font-family: 'Poppins';
@@ -38,7 +41,7 @@
       content: '<';
       display: inline-block;
       transform: rotate(-90deg);
-      transition: transform 0.5s;     
+      transition: transform 0.5s;
     }
   }
 
@@ -79,7 +82,7 @@
 
     /* Level 2 styling */
     > li {
-      padding: 16px 32px;
+      padding: var(--_vertical-padding) var(--_horizontal-padding);
 
       a {
         color: var(--_level-two-font-color);
@@ -143,4 +146,65 @@
     #ff0000
   );
   z-index: 1;
+}
+
+@media (min-width: 870px) {
+  .menu__hamburger {
+    display: none;
+  }
+}
+
+@media (max-width: 870px) {
+  .menu__hamburger {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+
+  input.menu__hamburger {
+    visibility: hidden;
+  }
+
+  label.menu__hamburger {
+    letter-spacing: 2px;
+    font-size: 26px;
+    font-weight: bold;
+    transform: rotate(90deg);
+  }
+
+  input[type='checkbox']:not(:checked) ~ li:not(:last-child) {
+    display: none;
+  }
+
+  .menu__level-first:first-of-type {
+    margin-top: 52px;
+  }
+
+  .menu {
+    --_horizontal-padding: 16px;
+    --_vertical-padding: 6px;
+
+    flex-direction: column;
+    min-height: 62px;
+
+    > li:last-child {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      margin-right: 0;
+    }
+
+    > li:hover > ul,
+    > ul:hover {
+      position: static;
+      background-color: var(--_main);
+      flex-direction: column;
+      gap: 0;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+    }
+  }
 }
