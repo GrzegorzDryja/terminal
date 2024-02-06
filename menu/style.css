@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.menu {
+  --_main: #f4f4f4;
+  --_level-one-font-color: #333333;
+  --_level-two-font-color: #000000;
+  --_width: 1170px;
+
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  max-width: var(--_width);
+  background-color: var(--_main);
+  margin: 0 auto;
+
+  a {
+    text-decoration: none;
+  }
+
+  > li {
+    padding: 16px 32px;
+
+    > a {
+      font-family: 'Poppins';
+      font-size: 16px;
+      color: var(--_level-one-font-color);
+      text-transform: lowercase;
+    }
+
+    > a:has(+ ul)::after {
+      margin-left: 5px;
+      content: '<';
+      display: inline-block;
+      transform: rotate(-90deg);
+      transition: transform 0.5s;     
+    }
+  }
+
+  > li:last-of-type {
+    padding: 8px 20px;
+    background-color: #ff4242;
+    border-radius: 5px;
+    align-self: center;
+    margin-left: auto;
+    margin-right: 10px;
+
+    a {
+      color: white;
+      text-transform: uppercase;
+    }
+  }
+
+  li {
+    list-style-type: none;
+    cursor: pointer;
+    z-index: 2;
+
+    ul {
+      display: none;
+    }
+  }
+
+  > li:hover > ul,
+  > ul:hover {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    margin-top: 10px;
+    background-color: var(--_main);
+    display: flex;
+    gap: 30px;
+
+    /* Level 2 styling */
+    > li {
+      padding: 16px 32px;
+
+      a {
+        color: var(--_level-two-font-color);
+        font-family: 'Inter';
+        font-weight: 400;
+        font-size: 13px;
+      }
+
+      > a {
+        font-weight: 500;
+        font-size: 15px;
+      }
+
+      > ul {
+        display: block;
+      }
+    }
+  }
+
+  /* Arrow up */
+  .menu__level-first:hover > a:first-child:has(+ ul) {
+    position: relative;
+  }
+
+  .menu__level-first:hover > a:first-child:has(+ ul)::after {
+    transform: rotate(90deg);
+    transition: transform 0.5s;
+  }
+
+  .menu__level-first:hover > a:first-child:has(+ ul)::before {
+    content: '';
+    background-color: var(--_main);
+    width: calc(100% + 64px);
+    height: 20px;
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    display: block;
+    clip-path: polygon(calc(50% - 10px) 100%, calc(50% + 10px) 100%, 50% calc(100% - 10px));
+    transform: translate(-32px, 100%);
+  }
+}
+
+/* Rainbow line */
+.menu::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #fa00ff,
+    #0400d2,
+    #00b2ff,
+    #00ff57,
+    rgba(219, 247, 44, 0.6111),
+    rgba(255, 138, 0, 0.765),
+    #ff0000
+  );
+  z-index: 1;
+}
