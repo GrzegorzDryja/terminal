@@ -114,15 +114,17 @@
 
   .menu__level-first:hover > a:first-child:has(+ ul)::before {
     content: '';
-    background-color: var(--_main);
+    position: absolute;
+    display: block;
+    bottom: -13px;
+    left: 0;
     width: calc(100% + 64px);
     height: 20px;
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    display: block;
-    clip-path: polygon(calc(50% - 10px) 100%, calc(50% + 10px) 100%, 50% calc(100% - 10px));
     transform: translate(-32px, 100%);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 10'%3E %3Cpolygon points='0 10, 10 0, 20 10' style='fill:%23f4f4f4'/%3E %3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 10px;
   }
 }
 
