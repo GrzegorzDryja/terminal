@@ -1,7 +1,9 @@
-.loader--disabled {
+.loader--disabled,
+.suggestions--disabled {
   display: none;
 }
 
-.loader--enabled {
+.loader--enabled,
+.suggestions--enabled {
   display: block;
 }
