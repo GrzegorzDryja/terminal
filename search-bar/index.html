@@ -7,9 +7,13 @@
     <title>Search bar</title>
   </head>
   <body>
-    <input id="search-bar" type="search" />
-    <div id="loader" class="loader loader--disabled">Loading...</div>
-    <div id="suggestions" class="suggestions suggestions--disabbled" class></div>
+    <div class="search-bar-container">
+      <label id="search-bar-label" for="search-bar">Search</label>
+      <input id="search-bar" name="search-bar" type="text" aria-label="search" />
+      <div id="loader" class="loader loader--disabled"></div>
+      <div class="magnifier"></div>
+      <div id="suggestions" class="suggestions suggestions--disabbled" class></div>
+    </div>
     <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
