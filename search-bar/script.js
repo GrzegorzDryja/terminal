@@ -11,14 +11,14 @@ let fetchSuggestionsTimeout;
 
 searchBar.addEventListener('input', (event) => {
   searchRequest = event.target.value;
-  clearTimeout(fetchSuggestionsTimeout);  
-  
+  clearTimeout(fetchSuggestionsTimeout);
+
   if (searchRequest.length <= 2) {
     clearSearchSuggestions();
     return;
   }
-  
-  fetchSuggestionsTimeout = setTimeout(fetchSuggestions, 500);
+
+  fetchSuggestionsTimeout = setTimeout(fetchSuggestions, 200);
 });
 
 const clearSearchSuggestions = () => {
@@ -30,20 +30,24 @@ const fetchSuggestions = async () => {
   loading = true;
   loader.setAttribute('class', 'loader loader--enabled');
 
-  const response = await fetch(` https://dummyjson.com/products/search?q=${searchRequest}&limit=5&delay=1000`);
-  const data = await response.json();
+  try {
+    const response = await fetch(` https://dummyjson.com/products/search?q=${searchRequest}&limit=5&delay=1000`);
+    const data = await response.json();
 
-  if (data) {
-    loading = false;
-    searchResponse = data.products;
+    if (data) {
+      loading = false;
+      searchResponse = data.products;
+      clearSearchSuggestions();
+    }
+
+    if (data.products.length === 0) {
+      searchResponse = [{ title: 'Nie znalazłem sugestii... Spróbuj wpisać inne hasło :)', price: 'To akurat nic nie kosztuje' }];
+    }
+  } catch (error) {
+    console.error(error);
+  } finally {
     loader.setAttribute('class', 'loader loader--disabled');
-    clearSearchSuggestions();
     showSuggestions();
-  }
-
-  if (data.products.length === 0) {
-    searchResponse = [{ title: 'Nie znalazłem sugestii... Spróbuj wpisać inne hasło :)', price: 'To akurat nic nie kosztuje' }]
-    showSuggestions()
   }
 };
 
