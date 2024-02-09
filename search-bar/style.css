@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.search-bar-container {
+  position: relative;
+  width: fit-content;
+  margin: 1rem;
+}
+
+#search-bar,
+#search-bar:focus-visible {
+  outline: none;
+  border-radius: 5px;
+  border: 1px #d1d1d1 solid;
+  padding: 16px;
+  font-family: 'Inter';
+  font-size: 13px;
+  width: 336px;
+}
+
+#search-bar-label {
+  font-family: 'Inter';
+  font-size: 13px;
+  color: #8d8d8d;
+  display: block;
+  padding: 0 6px;
+  position: absolute;
+  background-color: #fff;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+
+#search-bar-label:has(+ #search-bar:focus),
+#search-bar-label:has(+ #search-bar:valid) {
+  top: 0;
+  transition: top 0.5s;
+}
+
+.magnifier {
+  content: '';
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  background: url(../assets/search.svg);
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+  display: grid;
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(0deg, rgb(0 0 0/50%) 30%, #0000 0 70%, rgb(0 0 0/100%) 0) 50%/8% 100%,
+    linear-gradient(90deg, rgb(0 0 0/25%) 30%, #0000 0 70%, rgb(0 0 0/75%) 0) 50%/100% 8%;
+  background-repeat: no-repeat;
+  animation: rotate 1s infinite steps(12);
+}
+
+.loader::before,
+.loader::after {
+  content: '';
+  grid-area: 1/1;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.915;
+  transform: rotate(30deg);
+}
+
+.loader::after {
+  opacity: 0.83;
+  transform: rotate(60deg);
+}
+
+.loader--enabled {
+  display: grid;
+}
+
+.suggestions--enabled {
+  display: block;
+}
+
+.suggestions {
+  position: absolute;
+  top: 60px;
+  display: grid;
+  grid-template-columns: 370px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+}
+
+.suggestions--enabled::before {
+  content: '';
+  position: absolute;
+  display: block;
+  top: -14px;
+  left: 0;
+  width: 70px;
+  height: 20px;
+  background-image: url(../assets/triangle.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 10px;
+}
+
+.loader--disabled,
+.suggestions--disabled {
+  display: none;
+}
+
+.suggestion-item {
+  padding: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #d9d9d9;
+  margin: 0 16px;
+}
+
+.suggestion-item:last-of-type {
+  border-bottom: 0;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(-50%) rotate(1turn);
+  }
+}
