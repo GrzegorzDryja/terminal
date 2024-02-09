@@ -1,8 +1,9 @@
 'use strict';
 import { COMMANDS } from './terminal.service.js';
 
-const main = document.getElementsByTagName('main');
+const ERROR_OUTPUT = "Don't understand command, try HELP";
 
+const main = document.getElementsByTagName('main');
 const terminal = document.createElement('terminal');
 const input = document.createElement('input');
 const datalist = document.createElement('datalist');
@@ -36,6 +37,11 @@ input.addEventListener('change', async (event) => {
     return;
   }
 
+  if (COMMANDS[userCommand] && typeof COMMANDS[userCommand] !== 'function') {
+    addItem('you', COMMANDS?.[userCommand].msg);
+    return
+  }
+
   if (COMMANDS?.[userCommand]) {
     const terminalOutput = await COMMANDS[userCommand]();
     //Guard For cleaning
@@ -45,7 +51,7 @@ input.addEventListener('change', async (event) => {
     return;
   }
 
-  addItem('terminal', "Don't understand command, try HELP");
+  addItem('terminal', ERROR_OUTPUT);
 });
 
 function addItem(author, text) {

@@ -3,12 +3,20 @@ import { list } from './script.js';
 
 const QUOTE_API_URL = 'https://dummyjson.com/quotes/random';
 
-export const COMMANDS = {
+const BUILD_IN_COMMANDS = {
   clear: clearChat,
   help: getHelp,
   quote: getQuote,
   double: double,
 };
+
+const CUSTOM_COMMANDS = {
+  hello: {
+    msg: 'Hello :)'
+  }
+}
+
+export const COMMANDS = Object.assign(BUILD_IN_COMMANDS, CUSTOM_COMMANDS)
 
 async function getQuote() {
   try {
