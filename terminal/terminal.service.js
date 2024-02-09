@@ -12,11 +12,11 @@ const BUILD_IN_COMMANDS = {
 
 const CUSTOM_COMMANDS = {
   hello: {
-    msg: 'Hello :)'
-  }
-}
+    msg: 'Hello :)',
+  },
+};
 
-export const COMMANDS = Object.assign(BUILD_IN_COMMANDS, CUSTOM_COMMANDS)
+export const COMMANDS = Object.assign(BUILD_IN_COMMANDS, CUSTOM_COMMANDS);
 
 async function getQuote() {
   try {
@@ -41,5 +41,9 @@ function clearChat() {
 }
 
 function double(value) {
-  return value * 2;
+  if (value) {
+    return value * 2;
+  }
+  
+  return 'Please provide number';
 }

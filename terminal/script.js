@@ -32,17 +32,21 @@ input.addEventListener('change', async (event) => {
   const userNumber = parseFloat(userCommandArray[1]);
 
   if (userCommandArray[0] === 'double' && !isNaN(userCommandArray[1]) && !isNaN(userNumber)) {
+    console.log('double')
     const terminalOutput = COMMANDS.double(userNumber);
     addItem('terminal', terminalOutput);
     return;
   }
 
   if (COMMANDS[userCommand] && typeof COMMANDS[userCommand] !== 'function') {
+    console.log('double')
+
     addItem('you', COMMANDS?.[userCommand].msg);
     return
   }
 
-  if (COMMANDS?.[userCommand]) {
+  if (COMMANDS[userCommand]) {
+
     const terminalOutput = await COMMANDS[userCommand]();
     //Guard For cleaning
     if (!terminalOutput) return;
@@ -60,8 +64,8 @@ function addItem(author, text) {
   list.appendChild(item);
 }
 
-terminal.appendChild(input);
-terminal.appendChild(datalist);
 terminal.appendChild(list);
+terminal.appendChild(datalist);
+terminal.appendChild(input);
 
 main[0].appendChild(terminal);

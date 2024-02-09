@@ -1,0 +1,46 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #131212;
+  font-family: 'Roboto Mono';
+  font-size: 12px;
+  color: #fff;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+}
+
+terminal {
+  display: grid;
+  grid-template-rows: 1fr 1px 20px;
+  height: 100%;
+  width: 100%;
+}
+
+input {
+  height: 16px;
+  grid-row: -1;
+  min-width: 80%;
+  max-width: 686px;
+  background-color: #3e3e3e;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  padding: 10px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+}
+
+ul {
+  overflow: overlay;
+}
+
+li {
+  width: 100%;
+  list-style-type: none;
+  padding-bottom: 1rem;
+}
