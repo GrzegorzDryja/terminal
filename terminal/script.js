@@ -5,31 +5,45 @@ const main = document.getElementsByTagName('main');
 
 const terminal = document.createElement('terminal');
 const input = document.createElement('input');
+
 export const list = document.createElement('ul');
 
 input.setAttribute('type', 'text');
 input.setAttribute('name', 'terminal');
 input.setAttribute('required', 'true');
 input.addEventListener('change', async (event) => {
+  //User input
+  addItem('you', event.target.value);
   const userCommand = event.target.value.toLowerCase();
-  const item = document.createElement('li');
-  item.innerText = `you: ${userCommand}`;
-  list.appendChild(item);
+  input.value = '';
 
-  if (COMMANDS?.[userCommand]) {
-    const itemChat = document.createElement('li');
-    const text = await COMMANDS[userCommand]();
-    if (!text) return;
+  //Terminal output, first check for math
+  const userCommandArray = userCommand.split(' ');
+  const userNumber = parseFloat(userCommandArray[1]);
 
-    itemChat.innerHTML = `terminal: ${text}`;
-    list.appendChild(itemChat);
+  if (userCommandArray[0] === 'double' && !isNaN(userCommandArray[1]) && !isNaN(userNumber)) {
+    const terminalOutput = COMMANDS.double(userNumber);
+    addItem('terminal', terminalOutput);
     return;
   }
 
-  const errorChat = document.createElement('li');
-  errorChat.innerText = `terminal: I can't understand You. Type HELP for available commands or add new custom once`;
-  list.appendChild(errorChat);
+  if (COMMANDS?.[userCommand]) {
+    const terminalOutput = await COMMANDS[userCommand]();
+    //Guard For cleaning
+    if (!terminalOutput) return;
+
+    addItem('terminal', terminalOutput);
+    return
+  }
+
+  addItem('terminal', 'Don\'t understand command, try HELP');
 });
+
+function addItem(author, text) {
+  const item = document.createElement('li');
+  item.innerHTML = `${author}: ${text}`;
+  list.appendChild(item);
+}
 
 terminal.appendChild(input);
 terminal.appendChild(list);

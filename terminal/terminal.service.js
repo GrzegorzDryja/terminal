@@ -18,25 +18,17 @@ async function getQuote() {
       const answer = await response.json();
       return `<i>${answer.quote}</i> ${answer.author}`;
     }
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.warn(error);
   }
 }
-
-// return
-//   .then((response) => {
-
-//     throw Error('Something went wrong downloading quote');
-//   })
-//   .then((response) => response.msg)
-//   .catch((err) => console.warn(err));
 
 function getHelp() {
   return Object.getOwnPropertyNames(COMMANDS).toString();
 }
 
 function clearChat() {
-  list.remove();
+  list.querySelectorAll('li').forEach((li) => li.remove());
   return null;
 }
 
