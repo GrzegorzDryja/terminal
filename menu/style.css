@@ -112,6 +112,7 @@
     transition: transform 0.5s;
   }
 
+  /* Triangle */
   .menu__level-first:hover > a:first-child:has(+ ul)::before {
     content: '';
     position: absolute;
@@ -121,7 +122,7 @@
     width: calc(100% + 64px);
     height: 20px;
     transform: translate(-32px, 100%);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 10'%3E %3Cpolygon points='0 10, 10 0, 20 10' style='fill:%23f4f4f4'/%3E %3C/svg%3E");
+    background-image: url(../assets/triangle.svg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 20px 10px;

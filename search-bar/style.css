@@ -77,11 +77,6 @@
   transform: rotate(60deg);
 }
 
-.loader--disabled,
-.suggestions--disabled {
-  display: none;
-}
-
 .loader--enabled {
   display: grid;
 }
@@ -97,6 +92,25 @@
   grid-template-columns: 370px;
   background-color: #f4f4f4;
   border-radius: 5px;
+}
+
+.suggestions--enabled::before {
+  content: '';
+  position: absolute;
+  display: block;
+  top: -14px;
+  left: 0;
+  width: 70px;
+  height: 20px;
+  background-image: url(../assets/triangle.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 10px;
+}
+
+.loader--disabled,
+.suggestions--disabled {
+  display: none;
 }
 
 .suggestion-item {
