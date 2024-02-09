@@ -5,12 +5,21 @@ const main = document.getElementsByTagName('main');
 
 const terminal = document.createElement('terminal');
 const input = document.createElement('input');
+const datalist = document.createElement('datalist');
+datalist.setAttribute('id', 'commands');
+
+for (const command in COMMANDS) {
+  const option = document.createElement('option');
+  option.setAttribute('value', command);
+  datalist.appendChild(option);
+}
 
 export const list = document.createElement('ul');
 
+input.setAttribute('list', 'commands');
 input.setAttribute('type', 'text');
 input.setAttribute('name', 'terminal');
-input.setAttribute('required', 'true');
+input.setAttribute('required', true);
 input.addEventListener('change', async (event) => {
   //User input
   addItem('you', event.target.value);
@@ -33,10 +42,10 @@ input.addEventListener('change', async (event) => {
     if (!terminalOutput) return;
 
     addItem('terminal', terminalOutput);
-    return
+    return;
   }
 
-  addItem('terminal', 'Don\'t understand command, try HELP');
+  addItem('terminal', "Don't understand command, try HELP");
 });
 
 function addItem(author, text) {
@@ -46,6 +55,7 @@ function addItem(author, text) {
 }
 
 terminal.appendChild(input);
+terminal.appendChild(datalist);
 terminal.appendChild(list);
 
 main[0].appendChild(terminal);
