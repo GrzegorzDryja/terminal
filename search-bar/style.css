@@ -3,6 +3,7 @@
 .search-bar-container {
   position: relative;
   width: fit-content;
+  margin: 1rem;
 }
 
 #search-bar,
@@ -13,9 +14,7 @@
   padding: 16px;
   font-family: 'Inter';
   font-size: 13px;
-  color: #8d8d8d;
-  width: 370px;
-  margin: 10px;
+  width: 336px;
 }
 
 #search-bar-label {
@@ -27,12 +26,13 @@
   position: absolute;
   background-color: #fff;
   top: 50%;
-  left: 18px;
+  left: 10px;
   transform: translateY(-50%);
 }
 
-#search-bar-label:has(+ #search-bar:focus-visible) {
-  top: 15%;
+#search-bar-label:has(+ #search-bar:focus),
+#search-bar-label:has(+ #search-bar:valid) {
+  top: 0;
   transition: top 0.5s;
 }
 
@@ -92,6 +92,23 @@
 
 .suggestions {
   position: absolute;
+  top: 60px;
+  display: grid;
+  grid-template-columns: 370px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+}
+
+.suggestion-item {
+  padding: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #d9d9d9;
+  margin: 0 16px;
+}
+
+.suggestion-item:last-of-type {
+  border-bottom: 0;
 }
 
 @keyframes rotate {

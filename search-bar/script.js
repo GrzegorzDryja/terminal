@@ -23,7 +23,7 @@ searchBar.addEventListener('input', (event) => {
 
 const clearSearchSuggestions = () => {
   suggestions.setAttribute('class', 'suggestions suggestions--disabled');
-  suggestions.querySelectorAll('p').forEach((p) => p.remove());
+  suggestions.querySelectorAll('div').forEach((div) => div.remove());
 };
 
 const fetchSuggestions = async () => {
@@ -41,7 +41,7 @@ const fetchSuggestions = async () => {
     }
 
     if (data.products.length === 0) {
-      searchResponse = [{ title: 'Nie znalazłem sugestii... Spróbuj wpisać inne hasło :)', price: 'To akurat nic nie kosztuje' }];
+      searchResponse = [{ title: 'Nie znalazłem sugestii... Spróbuj wpisać inne hasło :)', price: '0.0' }];
     }
   } catch (error) {
     console.error(error);
@@ -54,8 +54,22 @@ const fetchSuggestions = async () => {
 const showSuggestions = () => {
   suggestions.setAttribute('class', 'suggestions suggestions--enabled');
   searchResponse.forEach((product) => {
-    const p = document.createElement('p');
-    p.innerText = `${product.title} | ${product.price}`;
-    suggestions.appendChild(p);
+    suggestions.appendChild(createSuggestionDiv({ title: product.title, price: product.price }));
   });
+};
+
+const createSuggestionDiv = ({ title, price }) => {
+  const containerDiv = document.createElement('div');
+  const titleDiv = document.createElement('div');
+  const priceDiv = document.createElement('div');
+
+  titleDiv.innerText = title;
+  priceDiv.innerText = `$${price}`;
+
+  containerDiv.appendChild(titleDiv);
+  containerDiv.appendChild(priceDiv);
+
+  containerDiv.setAttribute('class', 'suggestion-item');
+
+  return containerDiv;
 };
